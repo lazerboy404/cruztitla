@@ -58,6 +58,29 @@ Start Command: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
 
 El almacenamiento `backend/storage/` es temporal. Las credenciales se generan para descarga inmediata, pero no se deben considerar archivo historico permanente en Render sin un disco persistente o almacenamiento externo.
 
+### Si lo creas manual como Web Service
+
+Usa los mismos comandos:
+
+```text
+Build Command: pip install -r backend/requirements.txt
+Start Command: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+Health Check Path: /api/health
+```
+
+Y agrega estas variables en **Environment**:
+
+```text
+PYTHON_VERSION=3.11.9
+APP_TIMEZONE=America/Mexico_City
+OCR_PROVIDER=api_only
+OPENCV_NUM_THREADS=1
+OMP_NUM_THREADS=1
+OPENBLAS_NUM_THREADS=1
+```
+
+`OCR_PROVIDER=api_only` evita cargar OCR local pesado en Render. Para extraccion automatica en la nube, agrega tambien `OPENAI_API_KEY` o `GEMINI_API_KEY`. Si no agregas API, el sistema procesara la foto y permitira llenar/corregir datos manualmente.
+
 ## Keep-alive opcional
 
 El workflow `.github/workflows/keep-render-awake.yml` hace ping cada 10 minutos si existe el secreto:

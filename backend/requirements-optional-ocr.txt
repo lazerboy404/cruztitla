@@ -1,0 +1,2 @@
+# OCR local opcional. Es pesado para instancias pequenas de Render.
+rapidocr-onnxruntime>=1.4.0

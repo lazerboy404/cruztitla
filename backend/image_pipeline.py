@@ -7,6 +7,8 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+cv2.setNumThreads(int(os.getenv("OPENCV_NUM_THREADS", "1")))
+
 
 @dataclass
 class ImageProcessingResult:

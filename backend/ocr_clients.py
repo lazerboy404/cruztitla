@@ -74,34 +74,38 @@ def extract_player_data(image_path: Path) -> tuple[dict[str, str], list[str]]:
     warnings: list[str] = []
     provider = os.getenv("OCR_PROVIDER", "auto").lower()
     api_attempted = False
+    local_ocr_enabled = provider not in {"api", "api_only", "cloud", "disabled", "none", "manual"}
 
-    if provider in {"auto", "openai"} and os.getenv("OPENAI_API_KEY"):
+    if provider in {"auto", "api", "api_only", "cloud", "openai"} and os.getenv("OPENAI_API_KEY"):
         api_attempted = True
         try:
             return _extract_with_openai(image_path), warnings
         except Exception as exc:
             warnings.append(f"OCR OpenAI falló: {exc}")
 
-    if provider in {"auto", "gemini"} and os.getenv("GEMINI_API_KEY"):
+    if provider in {"auto", "api", "api_only", "cloud", "gemini"} and os.getenv("GEMINI_API_KEY"):
         api_attempted = True
         try:
             return _extract_with_gemini(image_path), warnings
         except Exception as exc:
             warnings.append(f"OCR Gemini falló: {exc}")
 
-    try:
-        local_result = _extract_with_rapidocr(image_path)
-        if local_result["nombre_completo"] or local_result["fecha_nacimiento"]:
-            if not local_result["nombre_completo"]:
-                warnings.append("OCR local encontró fecha, pero no nombre. Revisa el campo manualmente.")
-            if not local_result["fecha_nacimiento"]:
-                warnings.append("OCR local encontró nombre, pero no fecha. Revisa el campo manualmente.")
-            return local_result, warnings
-    except Exception as exc:
-        warnings.append(f"OCR local RapidOCR no disponible o falló: {exc}")
+    if local_ocr_enabled:
+        try:
+            local_result = _extract_with_rapidocr(image_path)
+            if local_result["nombre_completo"] or local_result["fecha_nacimiento"]:
+                if not local_result["nombre_completo"]:
+                    warnings.append("OCR local encontró fecha, pero no nombre. Revisa el campo manualmente.")
+                if not local_result["fecha_nacimiento"]:
+                    warnings.append("OCR local encontró nombre, pero no fecha. Revisa el campo manualmente.")
+                return local_result, warnings
+        except Exception as exc:
+            warnings.append(f"OCR local RapidOCR no disponible o falló: {exc}")
 
     if api_attempted:
         warnings.append("No se pudo extraer texto con API ni OCR local.")
+    elif not local_ocr_enabled:
+        warnings.append("OCR local desactivado en produccion. Captura o corrige los datos manualmente.")
     else:
         warnings.append("No hay OCR multimodal configurado y el OCR local no pudo extraer datos.")
     return _empty_result(), warnings

@@ -11,4 +11,10 @@ services:
       - key: APP_TIMEZONE
         value: America/Mexico_City
       - key: OCR_PROVIDER
-        value: auto
+        value: api_only
+      - key: OPENCV_NUM_THREADS
+        value: 1
+      - key: OMP_NUM_THREADS
+        value: 1
+      - key: OPENBLAS_NUM_THREADS
+        value: 1

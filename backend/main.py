@@ -5,7 +5,7 @@ import re
 import uuid
 from pathlib import Path
 
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -50,6 +50,14 @@ if FRONTEND_DIR.exists():
     app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR), name="frontend")
 
 
+@app.middleware("http")
+async def cache_static_assets(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path.startswith(("/static/", "/frontend/")):
+        response.headers.setdefault("Cache-Control", "public, max-age=31536000, immutable")
+    return response
+
+
 @app.get("/")
 def index() -> FileResponse:
     index_path = FRONTEND_DIR / "index.html"
@@ -79,7 +87,7 @@ def options() -> dict[str, object]:
         "credential_date_iso": current_credential_date_iso(),
         "default_temporada_suffix": DEFAULT_SEASON_SUFFIX,
         "season_suffixes": [f"{year:02d}" for year in range(20, 41)],
-        "template_url": "/static/plantilla.png",
+        "template_url": "/static/plantilla-preview.webp",
     }
 
 
