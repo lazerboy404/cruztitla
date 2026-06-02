@@ -215,10 +215,16 @@ async function generateCredential(event) {
     els.formatDownloadLink.classList.remove("is-disabled");
     els.resultState.textContent = "Credencial lista";
   } catch (error) {
-    showWarnings([error.message]);
+    if (isMissingSessionError(error)) {
+      state.sessionId = null;
+      resetDownloads();
+      showWarnings(["La sesion de procesamiento ya expiro o se perdio en Render. Sube la identificacion de nuevo."]);
+    } else {
+      showWarnings([error.message]);
+    }
     els.resultState.textContent = "No se pudo generar";
   } finally {
-    els.generateButton.disabled = false;
+    els.generateButton.disabled = !state.sessionId;
     hideLoading();
   }
 }
@@ -318,9 +324,16 @@ function clearWarnings() {
 async function readJsonResponse(response) {
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(payload.detail || "Solicitud fallida");
+    const error = new Error(payload.detail || "Solicitud fallida");
+    error.status = response.status;
+    error.detail = payload.detail || "";
+    throw error;
   }
   return payload;
+}
+
+function isMissingSessionError(error) {
+  return error?.status === 404 && /sesi[oó]n/i.test(error.message || "");
 }
 
 function withCache(url) {

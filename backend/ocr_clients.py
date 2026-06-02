@@ -105,7 +105,10 @@ def extract_player_data(image_path: Path) -> tuple[dict[str, str], list[str]]:
     if api_attempted:
         warnings.append("No se pudo extraer texto con API ni OCR local.")
     elif not local_ocr_enabled:
-        warnings.append("OCR local desactivado en produccion. Captura o corrige los datos manualmente.")
+        warnings.append(
+            "OCR automatico no configurado en Render. Agrega OPENAI_API_KEY o GEMINI_API_KEY "
+            "para extraer nombre y fecha automaticamente; mientras tanto captura los datos manualmente."
+        )
     else:
         warnings.append("No hay OCR multimodal configurado y el OCR local no pudo extraer datos.")
     return _empty_result(), warnings

@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BASE_DIR.parent
 STATIC_DIR = BASE_DIR / "static"
-STORAGE_DIR = BASE_DIR / "storage"
+STORAGE_DIR = Path(os.getenv("STORAGE_DIR", str(BASE_DIR / "storage")))
 FRONTEND_DIR = PROJECT_ROOT / "frontend"
 
 TEMPLATE_PATH = Path(os.getenv("TEMPLATE_PATH", str(STATIC_DIR / "plantilla.png")))

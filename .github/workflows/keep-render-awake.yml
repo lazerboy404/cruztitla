@@ -13,6 +13,8 @@ jobs:
         env:
           RENDER_KEEPALIVE_URL: ${{ secrets.RENDER_KEEPALIVE_URL }}
         run: |
+          RENDER_KEEPALIVE_URL="${RENDER_KEEPALIVE_URL:-https://cruztitla.onrender.com/api/health}"
+
           if [ -z "$RENDER_KEEPALIVE_URL" ]; then
             echo "RENDER_KEEPALIVE_URL secret is not configured."
             exit 0

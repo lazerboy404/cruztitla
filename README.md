@@ -74,12 +74,15 @@ Y agrega estas variables en **Environment**:
 PYTHON_VERSION=3.11.9
 APP_TIMEZONE=America/Mexico_City
 OCR_PROVIDER=api_only
+STORAGE_DIR=/tmp/cruztitla-storage
 OPENCV_NUM_THREADS=1
 OMP_NUM_THREADS=1
 OPENBLAS_NUM_THREADS=1
 ```
 
 `OCR_PROVIDER=api_only` evita cargar OCR local pesado en Render. Para extraccion automatica en la nube, agrega tambien `OPENAI_API_KEY` o `GEMINI_API_KEY`. Si no agregas API, el sistema procesara la foto y permitira llenar/corregir datos manualmente.
+
+Si ves "sesion no encontrada", normalmente significa que Render reinicio el servicio y se perdieron los archivos temporales de `STORAGE_DIR`. Vuelve a subir la identificacion. Para conservar sesiones durante reinicios, agrega un disco persistente en Render y apunta `STORAGE_DIR` al mount path de ese disco.
 
 ## Keep-alive opcional
 
