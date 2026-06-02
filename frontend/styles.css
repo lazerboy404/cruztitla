@@ -1,0 +1,757 @@
+:root {
+  color-scheme: light;
+  --bg: #f7f9f8;
+  --panel: #ffffff;
+  --text: #101716;
+  --green: #0b4f2d;
+  --green-deep: #003f21;
+  --green-soft: #eef7f1;
+  --red: #b7192b;
+  --red-deep: #9f1424;
+  --muted: #5d6765;
+  --border: #d9dee3;
+  --border-strong: #c7cfd3;
+  --shadow-soft: 0 14px 38px rgba(20, 32, 28, 0.08);
+  --shadow-pop: 0 16px 38px rgba(20, 32, 28, 0.18);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(11, 79, 45, 0.12), transparent 34rem),
+    linear-gradient(135deg, #f5faf7 0%, #eef4f0 48%, #f8f9f7 100%);
+  color: var(--text);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+label,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+svg {
+  display: block;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 80px;
+  padding: 14px 30px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+}
+
+.brand-block,
+.admin-button,
+.season-control,
+.date-control,
+.download-button,
+.format-button,
+.primary-button {
+  display: flex;
+  align-items: center;
+}
+
+.brand-block {
+  gap: 18px;
+  min-width: 0;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  color: var(--green);
+}
+
+.brand-mark svg {
+  width: 46px;
+  height: 46px;
+}
+
+.soccer-ball-base {
+  fill: #fff;
+  stroke: none;
+}
+
+.soccer-ball-ring {
+  fill: none;
+  stroke: #050505;
+  stroke-width: 3.4;
+}
+
+.soccer-seam {
+  fill: none;
+  stroke: #050505;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.soccer-white-panel {
+  fill: #fff;
+  stroke: #050505;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.soccer-black-panel {
+  fill: #050505;
+  stroke: #050505;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.topbar h1 {
+  margin: 0;
+  color: var(--green);
+  font-size: 28px;
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+
+.admin-button,
+.calendar-nav,
+.icon-button {
+  border: 1px solid var(--border-strong);
+  background: #fff;
+  color: #1c2926;
+  cursor: pointer;
+}
+
+.admin-button {
+  gap: 10px;
+  min-height: 44px;
+  border-color: transparent;
+  padding: 0;
+  color: #1f2a2b;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.admin-button svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.admin-button svg:first-child {
+  width: 38px;
+  height: 38px;
+  padding: 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+}
+
+.icon-button svg,
+.calendar-nav svg,
+.primary-button svg,
+.download-button svg,
+.format-button svg,
+.upload-card > svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.season-control {
+  gap: 12px;
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.season-control select {
+  width: 84px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0 10px;
+  background: #fff;
+  color: #1e2926;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 464px minmax(720px, 1fr);
+  gap: 26px;
+  padding: 22px 30px 30px;
+}
+
+.workspace-panel {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.panel-card,
+.result-panel {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+
+.panel-card {
+  padding: 18px;
+}
+
+.section-heading h3,
+.section-heading p,
+.preview-toolbar h3 {
+  margin: 0;
+}
+
+.data-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.section-heading h3,
+.preview-toolbar h3 {
+  color: #111;
+  font-size: 18px;
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+.section-heading p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.upload-card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  min-height: 202px;
+  margin-top: 14px;
+  border: 1.5px dashed var(--green);
+  border-radius: 5px;
+  background: #fbfcfc;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-card input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-card > svg {
+  width: 46px;
+  height: 46px;
+  color: #0d773d;
+}
+
+.upload-card span {
+  color: #3f4849;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.upload-card strong {
+  display: inline-grid;
+  place-items: center;
+  min-width: 158px;
+  height: 34px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.upload-card small {
+  color: #5d6565;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.upload-card:hover,
+.upload-card.is-dragging {
+  background: var(--green-soft);
+  box-shadow: inset 0 0 0 1px rgba(11, 79, 45, 0.08);
+}
+
+.preview-strip {
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.preview-strip figure {
+  display: grid;
+  grid-template-rows: 116px auto;
+  min-height: 146px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #f5f7f6;
+}
+
+.preview-strip img {
+  width: 100%;
+  height: 116px;
+  object-fit: contain;
+  background: #eef2f0;
+}
+
+.preview-strip img:not([src]) {
+  visibility: hidden;
+}
+
+.preview-strip figcaption {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 9px;
+  color: #596661;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.form-card {
+  padding-bottom: 24px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.form-grid label,
+.date-field {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  align-items: center;
+  gap: 0;
+}
+
+.form-grid span,
+.date-field > span {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.form-grid input,
+.form-grid select,
+.date-control input {
+  width: 100%;
+  height: 36px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0 14px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 520;
+}
+
+.form-grid input:focus,
+.form-grid select:focus,
+.date-control input:focus,
+.season-control select:focus {
+  outline: 3px solid rgba(11, 79, 45, 0.13);
+  border-color: var(--green);
+}
+
+.date-field {
+  position: relative;
+}
+
+.date-control {
+  gap: 8px;
+}
+
+.date-control input[readonly] {
+  background: #fff;
+}
+
+.icon-button {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 40px;
+  height: 36px;
+  border-color: var(--green);
+  border-radius: 5px;
+  color: var(--green);
+}
+
+.icon-button:hover,
+.icon-button.is-active {
+  background: var(--green-soft);
+}
+
+.calendar-popover {
+  position: absolute;
+  right: 0;
+  top: 46px;
+  z-index: 30;
+  width: 220px;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: var(--shadow-pop);
+}
+
+.calendar-head {
+  display: grid;
+  grid-template-columns: 28px 1fr 28px;
+  align-items: center;
+  gap: 6px;
+}
+
+.calendar-head strong {
+  color: #222;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: lowercase;
+}
+
+.calendar-nav {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.calendar-nav:hover {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.calendar-nav svg {
+  width: 18px;
+  height: 18px;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-weekdays {
+  margin-top: 10px;
+  color: #687170;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.calendar-grid {
+  margin-top: 6px;
+}
+
+.calendar-day {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #121918;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.calendar-day:hover {
+  background: var(--green-soft);
+}
+
+.calendar-day.is-selected {
+  color: #fff;
+  background: #006b39;
+}
+
+.calendar-day.is-muted {
+  color: #87908e;
+}
+
+.primary-button {
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  height: 52px;
+  margin-top: 30px;
+  border: 0;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #08783b 0%, #005726 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 850;
+  cursor: pointer;
+  box-shadow: 0 12px 20px rgba(0, 87, 38, 0.16);
+}
+
+.primary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  box-shadow: none;
+}
+
+.result-panel {
+  align-self: start;
+  min-height: calc(100vh - 174px);
+  padding: 0;
+  overflow: visible;
+}
+
+.preview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 74px;
+  padding: 20px 20px 14px;
+}
+
+.preview-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.download-button,
+.format-button {
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  border: 1px solid var(--red);
+  border-radius: 5px;
+  padding: 0 12px;
+  background: var(--red);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.download-button:hover {
+  border-color: var(--red-deep);
+  background: var(--red-deep);
+}
+
+.format-button {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.format-button:hover {
+  border-color: var(--green-deep);
+  background: var(--green-deep);
+}
+
+.download-button.is-disabled,
+.format-button.is-disabled {
+  display: none;
+}
+
+.credential-frame {
+  position: relative;
+  padding: 18px 20px 28px;
+}
+
+.credential-frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1601 / 982;
+  object-fit: contain;
+  border: 1px solid #101010;
+  border-radius: 10px;
+  box-shadow: var(--shadow-soft);
+}
+
+.warnings {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1px solid #ead7a7;
+  border-radius: 5px;
+  background: #fff8e7;
+  color: #6f4c00;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: transparent;
+}
+
+.loading-overlay[hidden],
+.calendar-popover[hidden],
+.warnings[hidden] {
+  display: none;
+}
+
+.loading-box {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: 132px;
+  min-height: 132px;
+  padding: 22px 16px 16px;
+  border-radius: 8px;
+  background: rgba(35, 35, 35, 0.82);
+  color: #fff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+  text-align: center;
+}
+
+.loading-box strong,
+.loading-box p {
+  margin: 0;
+}
+
+.loading-box strong {
+  font-size: 17px;
+  font-weight: 850;
+  line-height: 1.15;
+}
+
+.loading-box p {
+  display: none;
+}
+
+.spinner {
+  width: 46px;
+  height: 46px;
+  border: 5px solid rgba(255, 255, 255, 0.28);
+  border-top-color: #fff;
+  border-radius: 999px;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1180px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .result-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar,
+  .preview-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .topbar,
+  .app-shell {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .topbar h1 {
+    font-size: 21px;
+  }
+
+  .admin-button {
+    display: none;
+  }
+
+  .data-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .season-control {
+    width: 100%;
+  }
+
+  .season-control select {
+    width: 100%;
+  }
+
+  .app-shell {
+    padding-bottom: 18px;
+  }
+
+  .form-grid label,
+  .date-field {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .preview-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-popover {
+    left: 0;
+    right: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}

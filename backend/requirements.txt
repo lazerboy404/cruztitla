@@ -1,0 +1,10 @@
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9
+opencv-python-headless>=4.9.0
+numpy>=1.26.0
+pillow>=10.0.0
+pydantic>=2.7.0
+openai>=1.51.0
+google-generativeai>=0.8.0
+rapidocr-onnxruntime>=1.4.0

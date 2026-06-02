@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local environment and secrets
+.env
+.env.*
+
+# Runtime uploads and generated credentials
+backend/storage/
+
+# Local test identification images
+/plantilla.png
+perspectivefix-corrected*.png
+*.tmp
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
